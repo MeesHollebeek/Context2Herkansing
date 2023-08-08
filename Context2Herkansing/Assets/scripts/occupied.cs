@@ -4,11 +4,21 @@ using UnityEngine;
 
 public class occupied : MonoBehaviour
 {
-    void OnTriggerEnter(Collider other)
+    public GameObject Building;
+
+    void Update()
     {
-        if (other.gameObject.CompareTag("plus"))
+        Building = GameObject.FindGameObjectWithTag("Placing");
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("Placing") || other.gameObject.CompareTag("Placing"))
         {
             tag = "Occupied";
+            Building.tag = "Placed";
+            Debug.Log("this");
         }
     }
+
 }

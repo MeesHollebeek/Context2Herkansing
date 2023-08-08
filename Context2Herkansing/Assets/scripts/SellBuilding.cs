@@ -4,25 +4,29 @@ using UnityEngine;
 
 public class SellBuilding : MonoBehaviour
 {
-  //  public GameObject Balance;
+    public GameObject ClearSpawnpoint;
 
-    private void Start()
+    private void Update()
     {
-      //  Balance = GameObject.FindGameObjectWithTag("WipWap");
+      ClearSpawnpoint = GameObject.FindGameObjectWithTag("Occupied");
 
     }
 
     void OnMouseDown()
     {
-       // ValueForBalance script = Balance.GetComponent<ValueForBalance>();
+       // transform.position = new Vector3 (0, 0 * Time.deltaTime, 0);
 
+        Debug.Log("removed");
 
-        
-          //  script.Points = script.Points - 1;
-        // 1 moet de tegenovergestelde value zijn die het gebouw bij of af haald
+        StartCoroutine(Removing());
+    }
 
-        //hier moet nog stukje komen dat de occupied space niet meer occupied is of ik kan het doen met oncollider leave
-            Debug.Log("removed");
+    public IEnumerator Removing()
+    {
+        yield return new WaitForSeconds(.01f);
+
         Destroy(gameObject);
+
+        ClearSpawnpoint.tag = "SpawnPoint";
     }
 }
