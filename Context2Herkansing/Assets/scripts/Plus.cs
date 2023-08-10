@@ -22,4 +22,11 @@ public class Plus : MonoBehaviour
             Debug.Log("HIT");
         }
     }
+
+    void OnDestroy()
+    {
+        ValueForBalance script = Balance.GetComponent<ValueForBalance>();
+
+        script.Points = script.Points - 1;
+    }
 }

@@ -5,7 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - WipWap
-  - Scalable
+  - SpawnPoint
+  - Occupied
+  - Placing
+  - Placed
+  - Trash
   layers:
   - Default
   - TransparentFX
