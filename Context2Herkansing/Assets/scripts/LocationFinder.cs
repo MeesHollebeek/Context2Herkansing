@@ -10,7 +10,7 @@ public class LocationFinder : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        StartCoroutine(Removing());
     }
 
     // Update is called once per frame
@@ -21,14 +21,23 @@ public class LocationFinder : MonoBehaviour
         {
             transform.position = SpawnPoint.transform.position;
         }
-                   
+           
         if (transform.position.x == SpawnPoint.transform.position.x)
         {
           placed = true;
         }
-        
-       
-        
-        
+
+    }
+
+    public IEnumerator Removing()
+    {
+        yield return new WaitForSeconds(0.1f);
+
+
+
+        if (gameObject.tag == "Placing")
+        {
+             Destroy(gameObject);
+        }
     }
 }
