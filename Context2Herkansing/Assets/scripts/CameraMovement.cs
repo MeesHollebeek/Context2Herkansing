@@ -27,8 +27,8 @@ public class CameraMovement : MonoBehaviour
 
     private void Start()
     {
-        // Set the initial rotation of the camera to -90 degrees on the X-axis
-        targetRotation = new Vector3(-90f, 0f, 0f);
+        // Set the initial rotation of the camera to the desired starting position
+        targetRotation = new Vector3(0f, 90f, 0f);
 
         // Set the initial position of the camera
         Vector3 desiredPosition = target.position - Quaternion.Euler(targetRotation) * Vector3.forward * maxDistance;
@@ -37,6 +37,7 @@ public class CameraMovement : MonoBehaviour
         currentDistance = maxDistance;
 
         lastMousePosition = Input.mousePosition;
+        isRotating = false; // Disable rotation initially
     }
 
     private void Update()

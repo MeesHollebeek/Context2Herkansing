@@ -5,18 +5,27 @@ using UnityEngine;
 public class ObjectSpawner : MonoBehaviour
 {
     public GameObject[] objectsToSpawn; // An array of prefabs to spawn
-    public float spawnInterval = 2.0f; // Interval between spawns in seconds
+    public GameObject particleEffectPrefab; // The particle effect prefab
+    public float minSpawnInterval = 2.0f; // Minimum interval between spawns in seconds
+    public float maxSpawnInterval = 5.0f; // Maximum interval between spawns in seconds
     public Transform spawnLineStart; // Starting point of the spawn line
     public Transform spawnLineEnd; // Ending point of the spawn line
     private float timeSinceLastSpawn = 0.0f;
+    private float currentSpawnInterval;
+
+    private void Start()
+    {
+        currentSpawnInterval = Random.Range(minSpawnInterval, maxSpawnInterval);
+    }
 
     private void Update()
     {
         timeSinceLastSpawn += Time.deltaTime;
 
-        if (timeSinceLastSpawn >= spawnInterval)
+        if (timeSinceLastSpawn >= currentSpawnInterval)
         {
             SpawnObject();
+            currentSpawnInterval = Random.Range(minSpawnInterval, maxSpawnInterval);
             timeSinceLastSpawn = 0.0f;
         }
     }
@@ -27,6 +36,8 @@ public class ObjectSpawner : MonoBehaviour
         int randomIndex = Random.Range(0, objectsToSpawn.Length);
         GameObject newObject = Instantiate(objectsToSpawn[randomIndex], spawnPosition, Quaternion.identity);
         newObject.transform.rotation = Quaternion.Euler(0, 90, 0); // Rotate the object by 90 degrees around the y-axis
+
+        Instantiate(particleEffectPrefab, spawnPosition, Quaternion.identity);
     }
 
     private void OnDrawGizmosSelected()
