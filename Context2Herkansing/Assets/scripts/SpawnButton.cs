@@ -7,10 +7,16 @@ public class SpawnButton : MonoBehaviour
     public GameObject plus;
     public GameObject Minus;
 
+    public float SpacesOccupied;
+
 
     public void SpawnerPLusButton()
     {
-        Instantiate(plus, transform.position, Quaternion.identity);
+        if(SpacesOccupied < 9)
+        {
+            Instantiate(plus, transform.position, Quaternion.identity);
+        }
+       
 
 
 
@@ -18,7 +24,11 @@ public class SpawnButton : MonoBehaviour
 
     public void SpawnerMinusButton()
     {
-        Instantiate(Minus, transform.position, Quaternion.identity);
+        if (SpacesOccupied < 9)
+        {
+            Instantiate(Minus, transform.position, Quaternion.identity);
+        }
+       
 
 
 
