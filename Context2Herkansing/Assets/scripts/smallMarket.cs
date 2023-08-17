@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Market : MonoBehaviour
+public class smallMarket : MonoBehaviour
 {
     public GameObject MoneyManager;
 
@@ -17,12 +17,12 @@ public class Market : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public IEnumerator addingslowley()
     {
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(2f);
         MoneyCounter script = MoneyManager.GetComponent<MoneyCounter>();
 
         script.Money = script.Money + 1;

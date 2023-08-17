@@ -23,4 +23,6 @@ public class MoneyCounter : MonoBehaviour
     {
         ValueText.text = Money.ToString();
     }
+
+   
 }

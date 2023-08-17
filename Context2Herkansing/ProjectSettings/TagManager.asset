@@ -10,6 +10,7 @@ TagManager:
   - Placing
   - Placed
   - Trash
+  - Money
   layers:
   - Default
   - TransparentFX
