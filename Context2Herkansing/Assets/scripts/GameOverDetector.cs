@@ -8,6 +8,7 @@ public class GameOverDetector : MonoBehaviour
     public GameObject gameOverPanel; // The UI panel displaying "Game Over"
     public Canvas originalCanvas; // Reference to the original UI canvas
     public List<GameObject> objectsToHide; // List of objects to hide when triggered
+    public ParticleSystem particleSystemPrefab; // Particle system prefab
 
     private bool isGameOver = false;
 
@@ -18,7 +19,7 @@ public class GameOverDetector : MonoBehaviour
 
     private void Update()
     {
-        if (!isGameOver && Vector3.Distance(transform.position, endLine.position) < 3.0f)
+        if (!isGameOver && Vector3.Distance(transform.position, endLine.position) < 2.0f)
         {
             ShowGameOver();
         }
@@ -33,6 +34,9 @@ public class GameOverDetector : MonoBehaviour
         {
             obj.SetActive(false);
         }
+
+        // Create a particle system at the object's position
+        Instantiate(particleSystemPrefab, transform.position, Quaternion.identity);
 
         originalCanvas.enabled = false; // Hide the original UI canvas
         gameOverPanel.SetActive(true); // Show the "Game Over" UI panel
