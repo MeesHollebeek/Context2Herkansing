@@ -5,7 +5,7 @@ using UnityEngine;
 public class Market : MonoBehaviour
 {
     public GameObject MoneyManager;
-
+    public int MoneyAmount;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +25,7 @@ public class Market : MonoBehaviour
         yield return new WaitForSeconds(2f);
         MoneyCounter script = MoneyManager.GetComponent<MoneyCounter>();
 
-        script.Money = script.Money + 1;
+        script.Money = script.Money + MoneyAmount;
         StartCoroutine(addingslowley());
 
     }
