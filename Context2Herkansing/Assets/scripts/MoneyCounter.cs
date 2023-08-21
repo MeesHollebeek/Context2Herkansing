@@ -7,6 +7,7 @@ public class MoneyCounter : MonoBehaviour
 {
 
    public int Money = 10;
+   public int startingMoney = 100; 
 
 
     public Text ValueText;
@@ -15,7 +16,9 @@ public class MoneyCounter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-     
+        {
+            Money = startingMoney; 
+        }
     }
 
     // Update is called once per frame
@@ -23,6 +26,8 @@ public class MoneyCounter : MonoBehaviour
     {
         ValueText.text = Money.ToString();
     }
-
-   
+    public void SpendMoney(int amount)
+    {
+        Money -= amount;
+    }
 }
