@@ -146,3 +146,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoneyManager: {fileID: 0}
   MoneyAmount: -5
+  TickSpeed: 5
