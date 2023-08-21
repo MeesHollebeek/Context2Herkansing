@@ -6,6 +6,7 @@ public class Market : MonoBehaviour
 {
     public GameObject MoneyManager;
     public int MoneyAmount;
+    public float TickSpeed;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +23,7 @@ public class Market : MonoBehaviour
 
     public IEnumerator addingslowley()
     {
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(TickSpeed);
         MoneyCounter script = MoneyManager.GetComponent<MoneyCounter>();
 
         script.Money = script.Money + MoneyAmount;

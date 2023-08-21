@@ -146,3 +146,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoneyManager: {fileID: 3577899212825720897, guid: 1b1df2f14261238438b00d184e8077f6, type: 3}
   MoneyAmount: -5
+  TickSpeed: 5
