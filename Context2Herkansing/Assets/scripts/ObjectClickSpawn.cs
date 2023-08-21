@@ -8,39 +8,50 @@ public class ObjectClickSpawn : MonoBehaviour
     public LayerMask clickableLayer;   // Assign the specific layer in the Inspector
     public GameObject particleSystemPrefab; // Assign the Particle System prefab in the Inspector
     public MoneyCounter moneyManager; // Reference to the MoneyManager script
+    public float spawnCooldown = 2.0f;  // The cooldown time in seconds
+    private float lastSpawnTime;        // The time when the last object was spawned
 
     // List of spawnable objects to assign in the Inspector
     public List<GameObject> spawnableObjects = new List<GameObject>();
+    public float fixedXPosition = -0.0f; // The fixed X position
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && selectedObject != null)
+        // Check if the cooldown time has passed
+        if (Time.time - lastSpawnTime >= spawnCooldown)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, clickableLayer.value) && hit.collider.gameObject == gameObject)
+            if (Input.GetMouseButtonDown(0) && selectedObject != null)
             {
-                int cost = CalculateCostOfSelectedObject();
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
 
-                if (moneyManager.Money >= cost)
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity, clickableLayer.value) && hit.collider.gameObject == gameObject)
                 {
-                    moneyManager.SpendMoney(cost);
+                    int cost = CalculateCostOfSelectedObject();
 
-                    // Instantiate the selected object at the clicked position
-                    GameObject spawnedObject = Instantiate(selectedObject, hit.point, Quaternion.identity);
+                    if (moneyManager.Money >= cost)
+                    {
+                        moneyManager.SpendMoney(cost);
 
-                    // Instantiate the particle system at the same position
-                    Instantiate(particleSystemPrefab, hit.point, Quaternion.identity);
-                }
-                else
-                {
-                    Debug.Log("Not enough money!");
+                        // Set the spawn position
+                        Vector3 spawnPosition = new Vector3(fixedXPosition, hit.point.y, hit.point.z);
+
+                        // Instantiate the selected object at the spawn position
+                        GameObject spawnedObject = Instantiate(selectedObject, spawnPosition, Quaternion.identity);
+
+                        // Instantiate the particle system at the same position
+                        Instantiate(particleSystemPrefab, spawnPosition, Quaternion.identity);
+
+                        lastSpawnTime = Time.time;
+                    }
+                    else
+                    {
+                        Debug.Log("Not enough money!");
+                    }
                 }
             }
         }
     }
-
     int CalculateCostOfSelectedObject()
     {
         // Replace "BuildingCost" with the actual script attached to your selected objects
