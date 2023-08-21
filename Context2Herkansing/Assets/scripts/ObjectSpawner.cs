@@ -12,7 +12,7 @@ public class ObjectSpawner : MonoBehaviour
     public Transform spawnLineEnd; // Ending point of the spawn line
     private float timeSinceLastSpawn = 0.0f;
     private float currentSpawnInterval;
-
+    public HouseCounter houseCounter; // Reference to the HouseCounter script
     private void Start()
     {
         currentSpawnInterval = Random.Range(minSpawnInterval, maxSpawnInterval);
@@ -38,6 +38,7 @@ public class ObjectSpawner : MonoBehaviour
         newObject.transform.rotation = Quaternion.Euler(0, 90, 0); // Rotate the object by 90 degrees around the y-axis
 
         Instantiate(particleEffectPrefab, spawnPosition, Quaternion.identity);
+        houseCounter.IncrementHouseCount();
     }
 
     private void OnDrawGizmosSelected()
